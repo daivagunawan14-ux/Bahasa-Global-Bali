@@ -1,0 +1,14 @@
+const CACHE_NAME = 'super-app-v1';
+
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(clients.claim());
+});
+
+self.addEventListener('fetch', (event) => {
+  // Mengambil data langsung dari jaringan (Supabase) agar selalu real-time
+  event.respondWith(fetch(event.request));
+});

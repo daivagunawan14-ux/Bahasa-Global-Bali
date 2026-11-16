@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super App Kantor</title>
+
+  <!-- PENGATURAN PWA & IKON LAYAR UTAMA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Gudang & Kas">
+  <meta name="apple-mobile-web-app-title" content="Gudang & Kas">
+  <meta name="theme-color" content="#172033">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="icon" sizes="192x192" href="https://i.ibb.co.com/pBjRf26c/logo-bg-isotm-in-color-1-678ff167637b6.webp">
+  <link rel="apple-touch-icon" href="https://i.ibb.co.com/pBjRf26c/logo-bg-isotm-in-color-1-678ff167637b6.webp">
+
+  <!-- LIBRARY SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #222; }
+    
+    /* Sidebar */
+    .sidebar { position: fixed; left: 0; top: 0; width: 230px; height: 100vh; background: #172033; color: white; padding: 20px; }
+    .logo { font-size: 20px; font-weight: bold; margin-bottom: 30px; }
+    .menu { padding: 12px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+    .menu:hover, .menu.active-menu { background: #29364f; }
+    
+    /* Content */
+    .content { margin-left: 230px; padding: 30px; }
+    .page { display: none; }
+    .page.active { display: block; }
+    
+    /* Cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .card-title { color: #777; font-size: 14px; }
+    .card-value { font-size: 28px; font-weight: bold; margin-top: 10px; }
+    .text-green { color: #10b981 !important; }
+    .text-red { color: #ef4444 !important; }
+    
+    /* Tables & Panels */
+    .panel { background: white; padding: 20px; border-radius: 12px; margin-top: 20px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f5f5f5; }
+    
+    /* Forms & Buttons */
+    button { border: none; padding: 10px 15px; border-radius: 7px; cursor: pointer; font-weight: bold; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-success { background: #10b981; color: white; }
+    .btn-danger { background: #ef4444; color: white; }
+    input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 7px; }
+    label { font-size: 14px; font-weight: bold; }
+    
+    /* Modals */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); justify-content: center; align-items: center; z-index: 100; }
+    .modal.show { display: flex; }
+    .modal-content { background: white; width: 95%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 25px; border-radius: 12px; }
+    
+    @media(max-width:700px) {
+      .sidebar { width: 70px; padding: 10px; }
+      .logo { font-size: 0; } .logo:first-letter { font-size: 25px; }
+      .menu span { display: none; }
+      .content { margin-left: 70px; padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo">🚀 Super App</div>
+  <div class="menu active-menu" onclick="showPage('dashboard', this)">🏠 <span>Dashboard</span></div>
+  <div class="menu" onclick="showPage('barang', this)">📦 <span>Barang</span></div>
+  <div class="menu" onclick="showPage('event', this)">📅 <span>Event</span></div>
+  <div class="menu" onclick="showPage('transaksi', this)">📜 <span>Riwayat Gudang</span></div>
+  <div class="menu" onclick="showPage('keuangan', this)">💰 <span>Petty Cash</span></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- DASHBOARD GUDANG -->
+  <div id="dashboard" class="page active">
+    <h1>Dashboard Gudang</h1>
+    <div class="cards">
+      <div class="card"><div class="card-title">Jenis Barang</div><div id="totalJenis" class="card-value">0</div></div>
+      <div class="card"><div class="card-title">Total Stok</div><div id="totalStok" class="card-value">0</div></div>
+      <div class="card"><div class="card-title">Event Aktif</div><div id="eventAktif" class="card-value">0</div></div>
+    </div>
+  </div>
+
+  <!-- BARANG -->
+  <div id="barang" class="page">
+    <h1>Database Barang</h1>
+    <button class="btn-primary" onclick="openModal('barangModal')">+ Tambah Barang</button>
+    <div class="panel">
+      <input id="searchBarang" placeholder="🔍 Cari barang..." onkeyup="filterBarang()">
+      <table>
+        <thead><tr><th>Kode</th><th>Nama</th><th>Kategori</th><th>Stok</th><th>Kondisi</th><th>Lokasi</th></tr></thead>
+        <tbody id="barangTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EVENT -->
+  <div id="event" class="page">
+    <h1>Manajemen Event</h1>
+    <button class="btn-primary" onclick="openEventModal()">+ Buat Event</button>
+    <div class="panel">
+      <table>
+        <thead><tr><th>Event</th><th>Tanggal</th><th>Lokasi</th><th>PIC</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody id="eventTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TRANSAKSI GUDANG -->
+  <div id="transaksi" class="page">
+    <h1>Riwayat Transaksi Gudang</h1>
+    <div class="panel">
+      <table>
+        <thead><tr><th>Waktu</th><th>Nama Barang</th><th>Jenis</th><th>Jumlah</th><th>User</th><th>Keterangan</th></tr></thead>
+        <tbody id="transaksiTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- KEUANGAN / PETTY CASH -->
+  <div id="keuangan" class="page">
+    <h1>Buku Kas (Petty Cash)</h1>
+    
+    <div class="cards">
+      <div class="card">
+        <div class="card-title">Saldo Saat Ini</div>
+        <div id="kasSaldo" class="card-value">Rp 0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Total Pemasukan</div>
+        <div id="kasMasuk" class="card-value text-green">Rp 0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Total Pengeluaran</div>
+        <div id="kasKeluar" class="card-value text-red">Rp 0</div>
+      </div>
+    </div>
+
+    <button class="btn-success" onclick="openKasModal()">+ Catat Transaksi Kas</button>
+
+    <div class="panel">
+      <h3>Riwayat Transaksi Keuangan</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Kategori</th>
+            <th>Keterangan</th>
+            <th>Tipe</th>
+            <th>Nominal (Rp)</th>
+          </tr>
+        </thead>
+        <tbody id="kasTable">
+          <tr><td colspan="5">Loading data...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= MODALS ================= -->
+
+<!-- MODAL BARANG -->
+<div id="barangModal" class="modal">
+  <div class="modal-content">
+    <h2>Tambah Barang</h2>
+    <label>Kode Barang</label><input id="barangKode" placeholder="BRG-001">
+    <label>Nama Barang</label><input id="barangNama" placeholder="Contoh: HT Baofeng">
+    <label>Kategori</label>
+    <select id="barangKategori"><option>Komunikasi</option><option>Audio</option><option>Visual</option><option>Kabel</option><option>Lainnya</option></select>
+    <label>Satuan</label><input id="barangSatuan" value="Unit">
+    <label>Stok</label><input id="barangStok" type="number" min="0" value="1">
+    <label>Stok Minimum</label><input id="barangMinimum" type="number" min="0" value="1">
+    <label>Kondisi</label>
+    <select id="barangKondisi"><option>Baik</option><option>Rusak</option></select>
+    <label>Lokasi</label><input id="barangLokasi" placeholder="Gudang A">
+    <label>Keterangan</label><textarea id="barangKeterangan"></textarea>
+    <button class="btn-primary" onclick="saveBarang()">Simpan</button>
+    <button onclick="closeModal('barangModal')">Batal</button>
+  </div>
+</div>
+
+<!-- MODAL EVENT -->
+<div id="eventModal" class="modal">
+  <div class="modal-content">
+    <h2>Buat Event</h2>
+    <label>Nama Event</label><input id="eventNama">
+    <label>Tanggal Mulai</label><input id="eventMulai" type="date">
+    <label>Tanggal Selesai</label><input id="eventSelesai" type="date">
+    <label>Lokasi</label><input id="eventLokasi">
+    <label>PIC</label><input id="eventPIC">
+    <label>Keterangan</label><textarea id="eventKeterangan"></textarea>
+    
+    <hr>
+    <h3>📦 Barang yang Digunakan</h3>
+    <div style="background:#f5f7fa; padding:15px; border-radius:10px; margin-bottom:15px;">
+      <label>Pilih Barang</label>
+      <select id="eventBarangSelect"><option value="">-- Pilih Barang --</option></select>
+      <label>Jumlah Keluar</label>
+      <input id="eventBarangJumlah" type="number" min="1" value="1">
+      <button type="button" class="btn-primary" onclick="tambahBarangEvent()">+ Tambahkan Barang</button>
+    </div>
+    <div id="eventBarangList"><p style="color:#777;">Belum ada barang dipilih.</p></div>
+    <br>
+    <button class="btn-primary" onclick="saveEvent()">Simpan Event</button>
+    <button onclick="closeModal('eventModal')">Batal</button>
+  </div>
+</div>
+
+<!-- MODAL SELESAI EVENT -->
+<div id="selesaiEventModal" class="modal">
+  <div class="modal-content">
+    <h2>✅ Selesaikan Event</h2>
+    <p>Masukkan kondisi seluruh barang setelah event selesai.</p>
+    <div id="selesaiEventBarang">Loading...</div>
+    <br>
+    <button class="btn-primary" onclick="saveSelesaiEvent()">Simpan & Selesaikan</button>
+    <button onclick="closeModal('selesaiEventModal')">Batal</button>
+  </div>
+</div>
+
+<!-- MODAL KAS / KEUANGAN -->
+<div id="kasModal" class="modal">
+  <div class="modal-content">
+    <h2>Pencatatan Petty Cash</h2>
+    
+    <label>Tipe Transaksi</label>
+    <select id="kasTipe" onchange="renderKasKategori()">
+      <option value="PENGELUARAN">🔴 Pengeluaran (Expense)</option>
+      <option value="PEMASUKAN">🟢 Pemasukan (Income)</option>
+    </select>
+
+    <label>Tanggal</label>
+    <input id="kasTanggal" type="date">
+
+    <label>Kategori</label>
+    <select id="kasKategori"></select>
+
+    <label>Nominal (Rp)</label>
+    <input id="kasNominal" type="number" min="0" placeholder="Contoh: 150000">
+
+    <label>Keterangan / Catatan</label>
+    <textarea id="kasKeterangan" placeholder="Contoh: Beli bensin operasional event A..."></textarea>
+
+    <button id="btnSaveKas" class="btn-success" onclick="saveKas()">Simpan Transaksi</button>
+    <button onclick="closeModal('kasModal')">Batal</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   1. KONFIGURASI SUPABASE & PWA
+===================================================== */
+// GANTI DUA BARIS DI BAWAH INI DENGAN MILIK KAMU:
+const SUPABASE_URL = 'https://vewzcaxghmlsyjhyldow.supabase.co/rest/v1/';
+const SUPABASE_KEY = 'sb_publishable_L1Z2C3ddfhAcvRWUP6Vb_A_qwykKvBL';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW gagal:', err));
+  });
+}
+
+/* =====================================================
+   2. GLOBAL & NAVIGATION
+===================================================== */
+function showPage(page, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  
+  if (el) {
+    document.querySelectorAll('.menu').forEach(m => m.classList.remove('active-menu'));
+    el.classList.add('active-menu');
+  }
+
+  if (page === 'dashboard') loadDashboard();
+  if (page === 'barang') loadBarang();
+  if (page === 'event') loadEvents();
+  if (page === 'transaksi') loadTransaksi();
+  if (page === 'keuangan') loadKeuangan();
+}
+
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function formatRupiah(angka) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka || 0); }
+function formatDate(date) { return date ? new Date(date).toLocaleDateString('id-ID') : '-'; }
+
+/* =====================================================
+   3. DASHBOARD & BARANG
+===================================================== */
+let barangData = [];
+
+async function loadDashboard() {
+  const { data: barang } = await db.from('barang').select('stok');
+  const { data: events } = await db.from('event').select('status').eq('status', 'BERJALAN');
+
+  const totalJenis = barang ? barang.length : 0;
+  const totalStok = barang ? barang.reduce((sum, item) => sum + Number(item.stok || 0), 0) : 0;
+  const eventAktif = events ? events.length : 0;
+
+  document.getElementById('totalJenis').innerText = totalJenis;
+  document.getElementById('totalStok').innerText = totalStok;
+  document.getElementById('eventAktif').innerText = eventAktif;
+}
+
+async function loadBarang() {
+  const { data, error } = await db.from('barang').select('*').order('nama_barang', { ascending: true });
+  if (error) return alert('Gagal memuat barang: ' + error.message);
+  barangData = data || [];
+  renderBarang(barangData);
+}
+
+function renderBarang(data) {
+  document.getElementById('barangTable').innerHTML = data.map(item => `
+    <tr>
+      <td>${item.kode_barang || '-'}</td>
+      <td>${item.nama_barang}</td>
+      <td>${item.kategori || '-'}</td>
+      <td>${item.stok} ${item.satuan || ''}</td>
+      <td>${item.kondisi || 'Baik'}</td>
+      <td>${item.lokasi || '-'}</td>
+    </tr>
+  `).join('');
+}
+
+function filterBarang() {
+  const search = document.getElementById('searchBarang').value.toLowerCase();
+  renderBarang(barangData.filter(item => 
+    String(item.nama_barang).toLowerCase().includes(search) || 
+    String(item.kode_barang || '').toLowerCase().includes(search)
+  ));
+}
+
+async function saveBarang() {
+  const nama = document.getElementById('barangNama').value.trim();
+  const stok = Number(document.getElementById('barangStok').value || 0);
+  if (!nama) return alert('Nama barang wajib diisi.');
+
+  const payload = {
+    kode_barang: document.getElementById('barangKode').value.trim() || null,
+    nama_barang: nama,
+    kategori: document.getElementById('barangKategori').value,
+    satuan: document.getElementById('barangSatuan').value || 'Unit',
+    stok: stok,
+    stok_minimum: Number(document.getElementById('barangMinimum').value || 1),
+    kondisi: document.getElementById('barangKondisi').value,
+    lokasi: document.getElementById('barangLokasi').value.trim() || 'Gudang Utama',
+    keterangan: document.getElementById('barangKeterangan').value.trim()
+  };
+
+  const { data: inserted, error } = await db.from('barang').insert([payload]).select().single();
+  if (error) return alert('Gagal menyimpan barang: ' + error.message);
+
+  // Catat ke riwayat transaksi jika stok awal > 0
+  if (stok > 0 && inserted) {
+    await db.from('transaksi').insert([{
+      barang_id: inserted.id,
+      nama_barang: nama,
+      jenis_transaksi: 'MASUK',
+      jumlah: stok,
+      user_input: 'Admin',
+      keterangan: 'Stok awal barang baru'
+    }]);
+  }
+
+  alert('Barang berhasil disimpan!');
+  closeModal('barangModal');
+  loadBarang();
+  loadDashboard();
+}
+
+/* =====================================================
+   4. MANAJEMEN EVENT
+===================================================== */
+let selectedEventBarang = [];
+let currentSelesaiEvent = '';
+let selesaiEventItems = [];
+
+async function openEventModal() {
+  selectedEventBarang = [];
+  renderEventBarang();
+  openModal('eventModal');
+
+  const { data } = await db.from('barang').select('*').gt('stok', 0).order('nama_barang');
+  barangData = data || [];
+  document.getElementById('eventBarangSelect').innerHTML = `<option value="">-- Pilih Barang --</option>` + 
+    barangData.map(i => `<option value="${i.id}">${i.nama_barang} (Stok: ${i.stok})</option>`).join('');
+}
+
+function tambahBarangEvent() {
+  const idBarang = document.getElementById('eventBarangSelect').value;
+  const jumlah = Number(document.getElementById('eventBarangJumlah').value);
+  if (!idBarang || jumlah <= 0) return alert('Pilih barang dan jumlah valid.');
+  
+  const barang = barangData.find(i => i.id === idBarang);
+  if (jumlah > Number(barang.stok)) return alert('Stok tidak cukup!');
+  if (selectedEventBarang.find(i => i.idBarang === idBarang)) return alert('Barang sudah masuk list.');
+  
+  selectedEventBarang.push({ idBarang: barang.id, nama: barang.nama_barang, jumlah: jumlah, stok: Number(barang.stok) });
+  renderEventBarang();
+}
+
+function renderEventBarang() {
+  const container = document.getElementById('eventBarangList');
+  if (!selectedEventBarang.length) return container.innerHTML = '<p style="color:#777;">Belum ada barang dipilih.</p>';
+  container.innerHTML = `<table><thead><tr><th>Barang</th><th>Keluar</th><th>Aksi</th></tr></thead><tbody>` + 
+    selectedEventBarang.map((item, i) => `<tr><td>${item.nama}</td><td>${item.jumlah}</td>
+    <td><button type="button" class="btn-danger" onclick="selectedEventBarang.splice(${i},1); renderEventBarang()">Hapus</button></td></tr>`).join('') + `</tbody></table>`;
+}
+
+async function saveEvent() {
+  const nama = document.getElementById('eventNama').value.trim();
+  const tanggalMulai = document.getElementById('eventMulai').value;
+  if (!nama || !tanggalMulai || !selectedEventBarang.length) return alert('Lengkapi form dan pilih minimal 1 barang!');
+
+  // 1. Simpan Event
+  const { data: newEvent, error: errEvent } = await db.from('event').insert([{
+    nama_event: nama,
+    tanggal_mulai: tanggalMulai,
+    tanggal_selesai: document.getElementById('eventSelesai').value || tanggalMulai,
+    lokasi: document.getElementById('eventLokasi').value,
+    pic: document.getElementById('eventPIC').value,
+    keterangan: document.getElementById('eventKeterangan').value,
+    status: 'BERJALAN'
+  }]).select().single();
+
+  if (errEvent) return alert('Gagal membuat event: ' + errEvent.message);
+
+  // 2. Simpan Detail Barang, Kurangi Stok, dan Catat Log Transaksi
+  for (const item of selectedEventBarang) {
+    await db.from('event_detail').insert([{
+      event_id: newEvent.id,
+      barang_id: item.idBarang,
+      jumlah_pinjam: item.jumlah,
+      status_kembali: 'Dipinjam'
+    }]);
+
+    await db.from('barang').update({ stok: item.stok - item.jumlah }).eq('id', item.idBarang);
+
+    await db.from('transaksi').insert([{
+      barang_id: item.idBarang,
+      nama_barang: item.nama,
+      jenis_transaksi: 'KELUAR',
+      jumlah: item.jumlah,
+      event_id: newEvent.id,
+      user_input: document.getElementById('eventPIC').value || 'Admin',
+      keterangan: `Keluar untuk Event: ${nama}`
+    }]);
+  }
+
+  alert('Event berhasil dibuat dan stok otomatis dikurangi!');
+  closeModal('eventModal');
+  loadEvents();
+  loadDashboard();
+}
+
+async function loadEvents() {
+  const { data, error } = await db.from('event').select('*').order('created_at', { ascending: false });
+  if (error) return alert('Gagal memuat event: ' + error.message);
+
+  document.getElementById('eventTable').innerHTML = (data || []).map(ev => `
+    <tr>
+      <td>${ev.nama_event}</td>
+      <td>${formatDate(ev.tanggal_mulai)}</td>
+      <td>${ev.lokasi || '-'}</td>
+      <td>${ev.pic || '-'}</td>
+      <td><strong>${ev.status}</strong></td>
+      <td>${ev.status === 'BERJALAN' ? `<button class="btn-primary" onclick="openSelesaiEvent('${ev.id}')">Selesaikan</button>` : '✓ Selesai'}</td>
+    </tr>
+  `).join('');
+}
+
+async function openSelesaiEvent(idEvent) {
+  currentSelesaiEvent = idEvent;
+  openModal('selesaiEventModal');
+  document.getElementById('selesaiEventBarang').innerHTML = 'Loading...';
+
+  const { data, error } = await db
+    .from('event_detail')
+    .select('id, barang_id, jumlah_pinjam, barang(nama_barang, stok)')
+    .eq('event_id', idEvent);
+
+  if (error) return alert('Gagal mengambil detail barang: ' + error.message);
+
+  selesaiEventItems = data.map(d => ({
+    idDetail: d.id,
+    barangId: d.barang_id,
+    namaBarang: d.barang ? d.barang.nama_barang : 'Barang',
+    stokSaatIni: d.barang ? Number(d.barang.stok) : 0,
+    jumlahKeluar: Number(d.jumlah_pinjam)
+  }));
+
+  document.getElementById('selesaiEventBarang').innerHTML = selesaiEventItems.map((item, i) => `
+    <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px; border-radius:8px;">
+      <strong>${item.namaBarang}</strong> (Keluar: ${item.jumlahKeluar})<br><br>
+      Kembali Baik: <input type="number" id="kembali_${i}" value="${item.jumlahKeluar}" min="0" style="width:65px; display:inline; margin-right:10px;">
+      Rusak: <input type="number" id="rusak_${i}" value="0" min="0" style="width:65px; display:inline; margin-right:10px;">
+      Hilang: <input type="number" id="hilang_${i}" value="0" min="0" style="width:65px; display:inline;">
+    </div>
+  `).join('');
+}
+
+async function saveSelesaiEvent() {
+  for (let i = 0; i < selesaiEventItems.length; i++) {
+    const item = selesaiEventItems[i];
+    const kembali = Number(document.getElementById('kembali_' + i).value || 0);
+    const rusak = Number(document.getElementById('rusak_' + i).value || 0);
+    const hilang = Number(document.getElementById('hilang_' + i).value || 0);
+
+    if (kembali + rusak + hilang !== item.jumlahKeluar) {
+      return alert(`Jumlah ${item.namaBarang} tidak sesuai dengan total keluar (${item.jumlahKeluar})!`);
+    }
+  }
+
+  for (let i = 0; i < selesaiEventItems.length; i++) {
+    const item = selesaiEventItems[i];
+    const kembali = Number(document.getElementById('kembali_' + i).value || 0);
+    const rusak = Number(document.getElementById('rusak_' + i).value || 0);
+    const hilang = Number(document.getElementById('hilang_' + i).value || 0);
+
+    // Update detail event
+    await db.from('event_detail').update({
+      jumlah_kembali: kembali,
+      jumlah_rusak: rusak,
+      jumlah_hilang: hilang,
+      status_kembali: 'Kembali Lengkap'
+    }).eq('id', item.idDetail);
+
+    // Kembalikan stok barang yang kondisinya baik ke gudang
+    if (kembali > 0) {
+      await db.from('barang').update({ stok: item.stokSaatIni + kembali }).eq('id', item.barangId);
+
+      await db.from('transaksi').insert([{
+        barang_id: item.barangId,
+        nama_barang: item.namaBarang,
+        jenis_transaksi: 'MASUK',
+        jumlah: kembali,
+        event_id: currentSelesaiEvent,
+        user_input: 'Admin',
+        keterangan: `Pengembalian event (Rusak: ${rusak}, Hilang: ${hilang})`
+      }]);
+    }
+  }
+
+  // Tandai event selesai
+  await db.from('event').update({ status: 'SELESAI' }).eq('id', currentSelesaiEvent);
+
+  alert('Event selesai dan stok barang telah diperbarui!');
+  closeModal('selesaiEventModal');
+  loadEvents();
+  loadDashboard();
+}
+
+/* =====================================================
+   5. RIWAYAT TRANSAKSI GUDANG
+===================================================== */
+async function loadTransaksi() {
+  const { data, error } = await db.from('transaksi').select('*').order('tanggal', { ascending: false });
+  if (error) return alert('Gagal memuat riwayat: ' + error.message);
+
+  document.getElementById('transaksiTable').innerHTML = (data || []).map(t => `
+    <tr>
+      <td>${formatDate(t.tanggal)}</td>
+      <td>${t.nama_barang || '-'}</td>
+      <td><strong>${t.jenis_transaksi}</strong></td>
+      <td>${t.jumlah}</td>
+      <td>${t.user_input || '-'}</td>
+      <td>${t.keterangan || ''}</td>
+    </tr>
+  `).join('');
+}
+
+/* =====================================================
+   6. KEUANGAN / PETTY CASH
+===================================================== */
+let kasKategoriMaster = [];
+
+async function loadKeuangan() {
+  // Ambil kategori kas
+  const { data: katData } = await db.from('kas_kategori').select('*').order('nama_kategori');
+  kasKategoriMaster = katData || [];
+
+  // Ambil transaksi kas
+  const { data: trxData, error } = await db.from('kas_transaksi').select('*').order('tanggal', { ascending: false }).order('created_at', { ascending: false });
+  if (error) return alert('Gagal memuat data kas: ' + error.message);
+
+  const transaksi = trxData || [];
+  let totalMasuk = 0;
+  let totalKeluar = 0;
+
+  transaksi.forEach(t => {
+    const nom = Number(t.nominal || 0);
+    if (t.tipe === 'PEMASUKAN') totalMasuk += nom;
+    else totalKeluar += nom;
+  });
+
+  document.getElementById('kasSaldo').innerText = formatRupiah(totalMasuk - totalKeluar);
+  document.getElementById('kasMasuk').innerText = formatRupiah(totalMasuk);
+  document.getElementById('kasKeluar').innerText = formatRupiah(totalKeluar);
+
+  const tbody = document.getElementById('kasTable');
+  if (transaksi.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5">Belum ada transaksi kas.</td></tr>';
+  } else {
+    tbody.innerHTML = transaksi.map(t => {
+      const color = t.tipe === 'PEMASUKAN' ? 'text-green' : 'text-red';
+      const sign = t.tipe === 'PEMASUKAN' ? '+' : '-';
+      return `
+        <tr>
+          <td>${formatDate(t.tanggal)}</td>
+          <td><strong>${t.kategori}</strong></td>
+          <td>${t.keterangan || '-'}</td>
+          <td class="${color}"><strong>${t.tipe}</strong></td>
+          <td class="${color}"><strong>${sign} ${formatRupiah(t.nominal)}</strong></td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+function openKasModal() {
+  document.getElementById('kasTanggal').valueAsDate = new Date();
+  document.getElementById('kasNominal').value = '';
+  document.getElementById('kasKeterangan').value = '';
+  document.getElementById('kasTipe').value = 'PENGELUARAN';
+  renderKasKategori();
+  openModal('kasModal');
+}
+
+function renderKasKategori() {
+  const tipeSelected = document.getElementById('kasTipe').value;
+  const selectKategori = document.getElementById('kasKategori');
+  const filteredKat = kasKategoriMaster.filter(k => k.tipe === tipeSelected);
+  
+  if (filteredKat.length === 0) {
+    selectKategori.innerHTML = '<option value="Lain-lain">Lain-lain</option>';
+  } else {
+    selectKategori.innerHTML = filteredKat.map(k => `<option value="${k.nama_kategori}">${k.nama_kategori}</option>`).join('');
+  }
+}
+
+async function saveKas() {
+  const payload = {
+    tipe: document.getElementById('kasTipe').value,
+    tanggal: document.getElementById('kasTanggal').value,
+    kategori: document.getElementById('kasKategori').value,
+    nominal: Number(document.getElementById('kasNominal').value),
+    keterangan: document.getElementById('kasKeterangan').value.trim(),
+    user_input: 'Admin'
+  };
+
+  if (!payload.tanggal) return alert('Pilih tanggal!');
+  if (!payload.nominal || payload.nominal <= 0) return alert('Nominal tidak valid!');
+
+  const btn = document.getElementById('btnSaveKas');
+  btn.disabled = true;
+  btn.innerText = 'Menyimpan...';
+
+  const { error } = await db.from('kas_transaksi').insert([payload]);
+
+  btn.disabled = false;
+  btn.innerText = 'Simpan Transaksi';
+
+  if (error) return alert('Error: ' + error.message);
+
+  alert('Transaksi kas berhasil dicatat!');
+  closeModal('kasModal');
+  loadKeuangan();
+}
+
+/* =====================================================
+   7. INITIAL LOAD
+===================================================== */
+window.onload = function() {
+  loadDashboard();
+};
+</script>
+</body>
+</html>
