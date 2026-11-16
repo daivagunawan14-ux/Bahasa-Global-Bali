@@ -172,4 +172,1001 @@
       right: -30px;
       top: -30px;
       width: 130px;
-      height: 13
+      height: 130px;
+      background: radial-gradient(circle, rgba(212,175,55,0.28) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+    }
+    .hero-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 6px 0 14px 0;
+    }
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .quick-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .quick-btn:active { transform: scale(0.98); }
+
+    /* MONEY LOVER PETTY CASH STYLE */
+    .wallet-card {
+      background: linear-gradient(135deg, #D4AF37 0%, #AA8016 100%);
+      color: #1A160D;
+      padding: 22px;
+      border-radius: 22px;
+      box-shadow: 0 10px 25px rgba(170, 128, 22, 0.28);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .wallet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+    .wallet-balance {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 10px 0 18px 0;
+      letter-spacing: -0.5px;
+      color: #14110A;
+    }
+    .wallet-flow {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .flow-item { display: flex; align-items: center; gap: 10px; }
+    .flow-dot-in { width: 32px; height: 32px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .flow-dot-out { width: 32px; height: 32px; border-radius: 50%; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .flow-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    .flow-val-in { font-size: 14px; font-weight: 800; color: var(--green); }
+    .flow-val-out { font-size: 14px; font-weight: 800; color: var(--red); }
+
+    /* MONEY LOVER GROUPED TRANSACTIONS */
+    .ml-date-group {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .ml-date-header {
+      background: #FAF9F6;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .ml-trx-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid #F3F2EE;
+    }
+    .ml-trx-row:last-child { border-bottom: none; }
+    .ml-trx-left { display: flex; align-items: center; gap: 12px; }
+    .ml-cat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .ml-cat-name { font-size: 14px; font-weight: 700; color: var(--dark-bg); }
+    .ml-cat-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .ml-amount-in { font-size: 15px; font-weight: 800; color: var(--green); white-space: nowrap; }
+    .ml-amount-out { font-size: 15px; font-weight: 800; color: var(--red); white-space: nowrap; }
+
+    /* FLOATING ACTION BUTTON (MONEY LOVER STYLE) */
+    .fab-gold {
+      position: fixed;
+      bottom: 84px;
+      right: 20px;
+      background: linear-gradient(135deg, #D4AF37, #A67C1E);
+      color: #14110A;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(166, 124, 30, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      z-index: 60;
+    }
+    .fab-gold:active { transform: scale(0.95); }
+
+    /* ITEM CARDS (BARANG, EVENT, RIWAYAT) */
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: white;
+      font-family: inherit;
+      font-size: 14px;
+      margin-bottom: 14px;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--gold-primary); }
+
+    .list-card {
+      background: white;
+      border-radius: 16px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .item-title { font-size: 15px; font-weight: 700; color: var(--dark-bg); }
+    .item-meta { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .pill-gold { background: var(--gold-soft); color: var(--gold-dark); }
+    .pill-green { background: var(--green-soft); color: var(--green); }
+    .pill-red { background: var(--red-soft); color: var(--red); }
+
+    /* BUTTONS */
+    button { font-family: inherit; border: none; border-radius: 12px; padding: 11px 16px; font-weight: 700; font-size: 13px; cursor: pointer; }
+    .btn-gold { background: linear-gradient(135deg, #D4AF37, #B0861C); color: #14110A; box-shadow: 0 4px 12px rgba(176, 134, 28, 0.25); }
+    .btn-outline-gold {
+      background: var(--gold-soft);
+      color: var(--gold-dark);
+      border: 1px solid #EAD8A4;
+      padding: 8px 12px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-outline-gold:active { transform: scale(0.97); }
+    .btn-dark { background: var(--dark-bg); color: var(--gold-light); }
+    .btn-danger { background: var(--red-soft); color: var(--red); padding: 7px 12px; }
+    .btn-ghost { background: #F3F4F6; color: var(--text-main); }
+
+    /* BOTTOM NAVIGATION */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px 12px 4px;
+      z-index: 80;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 0;
+      border-radius: 12px;
+      transition: 0.2s;
+    }
+    .nav-icon {
+      font-size: 20px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      transition: 0.2s;
+    }
+    .nav-item.active {
+      color: var(--gold-dark);
+      font-weight: 800;
+    }
+    .nav-item.active .nav-icon {
+      background: var(--gold-soft);
+      transform: translateY(-2px);
+    }
+
+    /* MODALS (MOBILE SHEET STYLE) */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 13, 10, 0.6);
+      backdrop-filter: blur(3px);
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 100;
+    }
+    .modal.show { display: flex; }
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px 20px 30px 20px;
+      border-radius: 24px 24px 0 0;
+      animation: slideUp 0.25s ease;
+    }
+    @media(min-width: 600px) {
+      .modal { align-items: center; }
+      .modal-content { border-radius: 22px; width: 95%; }
+    }
+    @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .modal-title { font-size: 18px; font-weight: 800; margin: 0 0 16px 0; color: var(--dark-bg); }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      background: #FAF9F6;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-primary); background: white; }
+
+    /* SEGMENTED CONTROL MONEY LOVER MODAL */
+    .ml-type-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #F3F2EE;
+      padding: 4px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .ml-type-btn {
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .ml-type-btn.active-out { background: white; color: var(--red); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .ml-type-btn.active-in { background: white; color: var(--green); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .nominal-big {
+      font-size: 24px !important;
+      font-weight: 800 !important;
+      color: var(--dark-bg);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header class="app-header">
+  <div class="brand">
+    <img src="https://i.ibb.co.com/pBjRf26c/logo-bg-isotm-in-color-1-678ff167637b6.webp" alt="Logo Bahasa Global">
+    <div>
+      <div class="brand-title">Bahasa Global</div>
+      <span class="brand-sub">Warehouse & Petty Cash</span>
+    </div>
+  </div>
+  <span class="badge-gold">GOLD SYSTEM</span>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+  <!-- 1. DASHBOARD -->
+  <section id="dashboard" class="page active">
+    <div class="hero-card">
+      <span class="hero-tag">Ringkasan Operasional</span>
+      <h2 class="hero-title">Selamat Datang, Tim Bahasa Global</h2>
+      <div class="quick-actions">
+        <button class="quick-btn" onclick="openModal('barangModal')">📦 + Barang Baru</button>
+        <button class="quick-btn" onclick="openKasModal()">💰 + Catat Kas</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">Jenis Barang</div>
+        <div id="totalJenis" class="stat-val">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-label">Total Stok</div>
+        <div id="totalStok" class="stat-val">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎪</div>
+        <div class="stat-label">Event Aktif</div>
+        <div id="eventAktif" class="stat-val">0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BARANG -->
+  <section id="barang" class="page">
+    <div class="page-header">
+      <h1 class="page-title">Database Barang</h1>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-outline-gold" onclick="exportBarangCSV()">📥 CSV</button>
+        <button class="btn-gold" onclick="openModal('barangModal')">+ Barang</button>
+      </div>
+    </div>
+    <input id="searchBarang" class="search-box" placeholder="🔍 Cari nama atau kode barang..." onkeyup="filterBarang()">
+    <div id="barangList"></div>
+  </section>
+
+  <!-- 3. EVENT -->
+  <section id="event" class="page">
+    <div class="page-header">
+      <h1 class="page-title">Manajemen Event</h1>
+      <button class="btn-gold" onclick="openEventModal()">+ Buat Event</button>
+    </div>
+    <div id="eventList"></div>
+  </section>
+
+  <!-- 4. RIWAYAT GUDANG -->
+  <section id="transaksi" class="page">
+    <div class="page-header">
+      <h1 class="page-title">Riwayat Gudang</h1>
+      <button class="btn-outline-gold" onclick="exportTransaksiCSV()">📥 Export CSV</button>
+    </div>
+    <div id="transaksiList"></div>
+  </section>
+
+  <!-- 5. PETTY CASH (MONEY LOVER STYLE) -->
+  <section id="keuangan" class="page">
+    <div class="wallet-card">
+      <div class="wallet-top">
+        <span>💼 Dompet Petty Cash • Bahasa Global</span>
+        <span>IDR</span>
+      </div>
+      <div id="kasSaldo" class="wallet-balance">Rp 0</div>
+      <div class="wallet-flow">
+        <div class="flow-item">
+          <div class="flow-dot-in">↓</div>
+          <div>
+            <div class="flow-label">Pemasukan</div>
+            <div id="kasMasuk" class="flow-val-in">Rp 0</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-dot-out">↑</div>
+          <div>
+            <div class="flow-label">Pengeluaran</div>
+            <div id="kasKeluar" class="flow-val-out">Rp 0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-header" style="margin-top: 20px;">
+      <h3 style="margin:0; font-size:15px; color:var(--text-muted);">Riwayat Transaksi</h3>
+      <button class="btn-outline-gold" onclick="exportKasCSV()">📥 Export CSV</button>
+    </div>
+
+    <div id="kasList">
+      <p style="text-align:center; color:var(--text-muted);">Memuat transaksi...</p>
+    </div>
+
+    <button class="fab-gold" onclick="openKasModal()">＋ Transaksi</button>
+  </section>
+
+</main>
+
+<!-- BOTTOM NAVIGATION BAR -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="showPage('dashboard', this)">
+    <div class="nav-icon">🏠</div>
+    <span>Dashboard</span>
+  </div>
+  <div class="nav-item" onclick="showPage('barang', this)">
+    <div class="nav-icon">📦</div>
+    <span>Barang</span>
+  </div>
+  <div class="nav-item" onclick="showPage('event', this)">
+    <div class="nav-icon">📅</div>
+    <span>Event</span>
+  </div>
+  <div class="nav-item" onclick="showPage('transaksi', this)">
+    <div class="nav-icon">📜</div>
+    <span>Riwayat</span>
+  </div>
+  <div class="nav-item" onclick="showPage('keuangan', this)">
+    <div class="nav-icon">💰</div>
+    <span>Petty Cash</span>
+  </div>
+</nav>
+
+<!-- ================= MODALS ================= -->
+
+<!-- MODAL BARANG -->
+<div id="barangModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">📦 Tambah Barang Baru</h2>
+    <label>Kode Barang</label><input id="barangKode" placeholder="BRG-001">
+    <label>Nama Barang</label><input id="barangNama" placeholder="Contoh: HT Baofeng">
+    <label>Kategori</label>
+    <select id="barangKategori"><option>Komunikasi</option><option>Audio</option><option>Visual</option><option>Kabel</option><option>Lainnya</option></select>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div><label>Satuan</label><input id="barangSatuan" value="Unit"></div>
+      <div><label>Stok Awal</label><input id="barangStok" type="number" min="0" value="1"></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div><label>Stok Minimum</label><input id="barangMinimum" type="number" min="0" value="1"></div>
+      <div><label>Kondisi</label><select id="barangKondisi"><option>Baik</option><option>Rusak</option></select></div>
+    </div>
+    <label>Lokasi Penyimpanan</label><input id="barangLokasi" placeholder="Gudang A">
+    <label>Keterangan</label><textarea id="barangKeterangan" rows="2"></textarea>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <button class="btn-ghost" onclick="closeModal('barangModal')">Batal</button>
+      <button class="btn-gold" onclick="saveBarang()">Simpan Barang</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EVENT -->
+<div id="eventModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">📅 Buat Event Baru</h2>
+    <label>Nama Event</label><input id="eventNama" placeholder="Nama kegiatan...">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div><label>Tanggal Mulai</label><input id="eventMulai" type="date"></div>
+      <div><label>Tanggal Selesai</label><input id="eventSelesai" type="date"></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div><label>Lokasi</label><input id="eventLokasi" placeholder="Lokasi acara"></div>
+      <div><label>PIC</label><input id="eventPIC" placeholder="Penanggung jawab"></div>
+    </div>
+    <label>Keterangan</label><textarea id="eventKeterangan" rows="2"></textarea>
+    
+    <div style="background:var(--gold-soft); padding:14px; border-radius:14px; margin-bottom:14px; border:1px solid #EAD8A4;">
+      <label style="color:var(--gold-dark);">Pilih Barang Keluar</label>
+      <select id="eventBarangSelect" style="background:white;"><option value="">-- Pilih Barang --</option></select>
+      <div style="display:flex; gap:10px;">
+        <input id="eventBarangJumlah" type="number" min="1" value="1" style="background:white; margin-bottom:0; width:90px;">
+        <button type="button" class="btn-dark" style="flex:1;" onclick="tambahBarangEvent()">+ Tambahkan</button>
+      </div>
+    </div>
+    <div id="eventBarangList" style="margin-bottom:16px;"><p style="color:var(--text-muted); font-size:13px;">Belum ada barang dipilih.</p></div>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <button class="btn-ghost" onclick="closeModal('eventModal')">Batal</button>
+      <button class="btn-gold" onclick="saveEvent()">Simpan Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SELESAI EVENT -->
+<div id="selesaiEventModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">✅ Selesaikan Event</h2>
+    <p style="font-size:13px; color:var(--text-muted); margin-top:-8px;">Pastikan jumlah barang kembali, rusak, dan hilang sesuai dengan total keluar.</p>
+    <div id="selesaiEventBarang">Loading...</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px;">
+      <button class="btn-ghost" onclick="closeModal('selesaiEventModal')">Batal</button>
+      <button class="btn-gold" onclick="saveSelesaiEvent()">Selesaikan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KAS (MONEY LOVER INPUT STYLE) -->
+<div id="kasModal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">💰 Catat Transaksi Kas</h2>
+    
+    <div class="ml-type-switch">
+      <div id="tabOut" class="ml-type-btn active-out" onclick="setKasTipe('PENGELUARAN')">Pengeluaran</div>
+      <div id="tabIn" class="ml-type-btn" onclick="setKasTipe('PEMASUKAN')">Pemasukan</div>
+    </div>
+    <input type="hidden" id="kasTipe" value="PENGELUARAN">
+
+    <label>Nominal (Rp)</label>
+    <input id="kasNominal" class="nominal-big" type="number" min="0" placeholder="0">
+
+    <label>Kategori</label>
+    <select id="kasKategori"></select>
+
+    <label>Tanggal</label>
+    <input id="kasTanggal" type="date">
+
+    <label>Catatan / Keterangan</label>
+    <textarea id="kasKeterangan" rows="2" placeholder="Contoh: Tol Bandara - Denpasar..."></textarea>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <button class="btn-ghost" onclick="closeModal('kasModal')">Batal</button>
+      <button id="btnSaveKas" class="btn-gold" onclick="saveKas()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   1. KONFIGURASI SUPABASE & PWA
+===================================================== */
+const SUPABASE_URL = 'https://vewzcaxghmlsyjhyldow.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_L1Z2C3ddfhAcvRWUP6Vb_A_qwykKvBL';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW gagal:', err));
+  });
+}
+
+/* =====================================================
+   2. GLOBAL, NAVIGATION & CSV EXPORT HELPER
+===================================================== */
+function showPage(page, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  
+  if (el) {
+    document.querySelectorAll('.nav-item').forEach(m => m.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  if (page === 'dashboard') loadDashboard();
+  if (page === 'barang') loadBarang();
+  if (page === 'event') loadEvents();
+  if (page === 'transaksi') loadTransaksi();
+  if (page === 'keuangan') loadKeuangan();
+}
+
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function formatRupiah(angka) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka || 0); }
+function formatDate(date) { return date ? new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : '-'; }
+
+function downloadCSV(filename, headers, rows) {
+  if (!rows || rows.length === 0) {
+    return alert('Belum ada data untuk di-export.');
+  }
+  const escapeCSV = (val) => {
+    const str = String(val ?? '').replace(/"/g, '""');
+    return `"${str}"`;
+  };
+  const csvContent = '\uFEFF' + [
+    headers.map(escapeCSV).join(','),
+    ...rows.map(row => row.map(escapeCSV).join(','))
+  ].join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/* =====================================================
+   3. DASHBOARD & BARANG
+===================================================== */
+let barangData = [];
+
+async function loadDashboard() {
+  const { data: barang } = await db.from('barang').select('stok');
+  const { data: events } = await db.from('event').select('status').eq('status', 'BERJALAN');
+
+  const totalJenis = barang ? barang.length : 0;
+  const totalStok = barang ? barang.reduce((sum, item) => sum + Number(item.stok || 0), 0) : 0;
+  const eventAktif = events ? events.length : 0;
+
+  document.getElementById('totalJenis').innerText = totalJenis;
+  document.getElementById('totalStok').innerText = totalStok;
+  document.getElementById('eventAktif').innerText = eventAktif;
+}
+
+async function loadBarang() {
+  const { data, error } = await db.from('barang').select('*').order('nama_barang', { ascending: true });
+  if (error) return alert('Gagal memuat barang: ' + error.message);
+  barangData = data || [];
+  renderBarang(barangData);
+}
+
+function renderBarang(data) {
+  const container = document.getElementById('barangList');
+  if (!data.length) {
+    container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Belum ada data barang.</p>';
+    return;
+  }
+  container.innerHTML = data.map(item => `
+    <div class="list-card">
+      <div>
+        <div class="item-title">${item.nama_barang}</div>
+        <div class="item-meta">
+          <span class="pill pill-gold">${item.kode_barang || 'NO-CODE'}</span> • ${item.kategori || '-'} • 📍 ${item.lokasi || '-'}
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:17px; font-weight:800; color:var(--dark-bg);">${item.stok} <span style="font-size:12px; font-weight:600; color:var(--text-muted);">${item.satuan || ''}</span></div>
+        <span class="pill ${item.kondisi === 'Baik' ? 'pill-green' : 'pill-red'}" style="margin-top:4px;">${item.kondisi || 'Baik'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterBarang() {
+  const search = document.getElementById('searchBarang').value.toLowerCase();
+  renderBarang(barangData.filter(item => 
+    String(item.nama_barang).toLowerCase().includes(search) || 
+    String(item.kode_barang || '').toLowerCase().includes(search)
+  ));
+}
+
+function exportBarangCSV() {
+  const today = new Date().toISOString().slice(0, 10);
+  const headers = ['Kode Barang', 'Nama Barang', 'Kategori', 'Stok', 'Satuan', 'Stok Minimum', 'Kondisi', 'Lokasi', 'Keterangan'];
+  const rows = barangData.map(b => [
+    b.kode_barang || '-',
+    b.nama_barang,
+    b.kategori || '-',
+    b.stok,
+    b.satuan || 'Unit',
+    b.stok_minimum || 1,
+    b.kondisi || 'Baik',
+    b.lokasi || '-',
+    b.keterangan || '-'
+  ]);
+  downloadCSV(`Database_Barang_Bahasa_Global_${today}.csv`, headers, rows);
+}
+
+async function saveBarang() {
+  const nama = document.getElementById('barangNama').value.trim();
+  const stok = Number(document.getElementById('barangStok').value || 0);
+  if (!nama) return alert('Nama barang wajib diisi.');
+
+  const payload = {
+    kode_barang: document.getElementById('barangKode').value.trim() || null,
+    nama_barang: nama,
+    kategori: document.getElementById('barangKategori').value,
+    satuan: document.getElementById('barangSatuan').value || 'Unit',
+    stok: stok,
+    stok_minimum: Number(document.getElementById('barangMinimum').value || 1),
+    kondisi: document.getElementById('barangKondisi').value,
+    lokasi: document.getElementById('barangLokasi').value.trim() || 'Gudang Utama',
+    keterangan: document.getElementById('barangKeterangan').value.trim()
+  };
+
+  const { data: inserted, error } = await db.from('barang').insert([payload]).select().single();
+  if (error) return alert('Gagal menyimpan barang: ' + error.message);
+
+  if (stok > 0 && inserted) {
+    await db.from('transaksi').insert([{
+      barang_id: inserted.id,
+      nama_barang: nama,
+      jenis_transaksi: 'MASUK',
+      jumlah: stok,
+      user_input: 'Admin',
+      keterangan: 'Stok awal barang baru'
+    }]);
+  }
+
+  alert('Barang berhasil disimpan!');
+  closeModal('barangModal');
+  loadBarang();
+  loadDashboard();
+}
+
+/* =====================================================
+   4. MANAJEMEN EVENT
+===================================================== */
+let selectedEventBarang = [];
+let currentSelesaiEvent = '';
+let selesaiEventItems = [];
+
+async function openEventModal() {
+  selectedEventBarang = [];
+  renderEventBarang();
+  openModal('eventModal');
+
+  const { data } = await db.from('barang').select('*').gt('stok', 0).order('nama_barang');
+  barangData = data || [];
+  document.getElementById('eventBarangSelect').innerHTML = `<option value="">-- Pilih Barang --</option>` + 
+    barangData.map(i => `<option value="${i.id}">${i.nama_barang} (Stok: ${i.stok})</option>`).join('');
+}
+
+function tambahBarangEvent() {
+  const idBarang = document.getElementById('eventBarangSelect').value;
+  const jumlah = Number(document.getElementById('eventBarangJumlah').value);
+  if (!idBarang || jumlah <= 0) return alert('Pilih barang dan jumlah valid.');
+  
+  const barang = barangData.find(i => i.id === idBarang);
+  if (jumlah > Number(barang.stok)) return alert('Stok tidak cukup!');
+  if (selectedEventBarang.find(i => i.idBarang === idBarang)) return alert('Barang sudah masuk list.');
+  
+  selectedEventBarang.push({ idBarang: barang.id, nama: barang.nama_barang, jumlah: jumlah, stok: Number(barang.stok) });
+  renderEventBarang();
+}
+
+function renderEventBarang() {
+  const container = document.getElementById('eventBarangList');
+  if (!selectedEventBarang.length) return container.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">Belum ada barang dipilih.</p>';
+  container.innerHTML = selectedEventBarang.map((item, i) => `
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:#FAF9F6; border:1px solid var(--border); border-radius:10px; margin-bottom:6px;">
+      <span style="font-size:13px; font-weight:700;">${item.nama} (${item.jumlah})</span>
+      <button type="button" class="btn-danger" onclick="selectedEventBarang.splice(${i},1); renderEventBarang()">Hapus</button>
+    </div>
+  `).join('');
+}
+
+async function saveEvent() {
+  const nama = document.getElementById('eventNama').value.trim();
+  const tanggalMulai = document.getElementById('eventMulai').value;
+  if (!nama || !tanggalMulai || !selectedEventBarang.length) return alert('Lengkapi form dan pilih minimal 1 barang!');
+
+  const { data: newEvent, error: errEvent } = await db.from('event').insert([{
+    nama_event: nama,
+    tanggal_mulai: tanggalMulai,
+    tanggal_selesai: document.getElementById('eventSelesai').value || tanggalMulai,
+    lokasi: document.getElementById('eventLokasi').value,
+    pic: document.getElementById('eventPIC').value,
+    keterangan: document.getElementById('eventKeterangan').value,
+    status: 'BERJALAN'
+  }]).select().single();
+
+  if (errEvent) return alert('Gagal membuat event: ' + errEvent.message);
+
+  for (const item of selectedEventBarang) {
+    await db.from('event_detail').insert([{
+      event_id: newEvent.id,
+      barang_id: item.idBarang,
+      jumlah_pinjam: item.jumlah,
+      status_kembali: 'Dipinjam'
+    }]);
+
+    await db.from('barang').update({ stok: item.stok - item.jumlah }).eq('id', item.idBarang);
+
+    await db.from('transaksi').insert([{
+      barang_id: item.idBarang,
+      nama_barang: item.nama,
+      jenis_transaksi: 'KELUAR',
+      jumlah: item.jumlah,
+      event_id: newEvent.id,
+      user_input: document.getElementById('eventPIC').value || 'Admin',
+      keterangan: `Keluar untuk Event: ${nama}`
+    }]);
+  }
+
+  alert('Event berhasil dibuat!');
+  closeModal('eventModal');
+  loadEvents();
+  loadDashboard();
+}
+
+async function loadEvents() {
+  const { data, error } = await db.from('event').select('*').order('created_at', { ascending: false });
+  if (error) return alert('Gagal memuat event: ' + error.message);
+
+  const container = document.getElementById('eventList');
+  if (!data || !data.length) {
+    container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Belum ada data event.</p>';
+    return;
+  }
+
+  container.innerHTML = data.map(ev => `
+    <div class="list-card">
+      <div>
+        <div class="item-title">${ev.nama_event}</div>
+        <div class="item-meta">📅 ${formatDate(ev.tanggal_mulai)} • 📍 ${ev.lokasi || '-'}</div>
+        <div class="item-meta">👤 PIC: ${ev.pic || '-'}</div>
+      </div>
+      <div style="text-align:right;">
+        ${ev.status === 'BERJALAN' 
+          ? `<button class="btn-dark" onclick="openSelesaiEvent('${ev.id}')">Selesaikan</button>` 
+          : `<span class="pill pill-green">✓ Selesai</span>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+async function openSelesaiEvent(idEvent) {
+  currentSelesaiEvent = idEvent;
+  openModal('selesaiEventModal');
+  document.getElementById('selesaiEventBarang').innerHTML = 'Loading...';
+
+  const { data, error } = await db
+    .from('event_detail')
+    .select('id, barang_id, jumlah_pinjam, barang(nama_barang, stok)')
+    .eq('event_id', idEvent);
+
+  if (error) return alert('Gagal mengambil detail barang: ' + error.message);
+
+  selesaiEventItems = data.map(d => ({
+    idDetail: d.id,
+    barangId: d.barang_id,
+    namaBarang: d.barang ? d.barang.nama_barang : 'Barang',
+    stokSaatIni: d.barang ? Number(d.barang.stok) : 0,
+    jumlahKeluar: Number(d.jumlah_pinjam)
+  }));
+
+  document.getElementById('selesaiEventBarang').innerHTML = selesaiEventItems.map((item, i) => `
+    <div style="border:1px solid var(--border); padding:12px; margin-bottom:10px; border-radius:14px; background:#FAF9F6;">
+      <div style="font-weight:700; margin-bottom:8px;">${item.namaBarang} <span class="pill pill-gold">Keluar: ${item.jumlahKeluar}</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+        <div><label>Baik</label><input type="number" id="kembali_${i}" value="${item.jumlahKeluar}" min="0" style="margin-bottom:0; background:white;"></div>
+        <div><label>Rusak</label><input type="number" id="rusak_${i}" value="0" min="0" style="margin-bottom:0; background:white;"></div>
+        <div><label>Hilang</label><input type="number" id="hilang_${i}" value="0" min="0" style="margin-bottom:0; background:white;"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function saveSelesaiEvent() {
+  for (let i = 0; i < selesaiEventItems.length; i++) {
+    const item = selesaiEventItems[i];
+    const kembali = Number(document.getElementById('kembali_' + i).value || 0);
+    const rusak = Number(document.getElementById('rusak_' + i).value || 0);
+    const hilang = Number(document.getElementById('hilang_' + i).value || 0);
+
+    if (kembali + rusak + hilang !== item.jumlahKeluar) {
+      return alert(`Jumlah ${item.namaBarang} tidak sesuai dengan total keluar (${item.jumlahKeluar})!`);
+    }
+  }
+
+  for (let i = 0; i < selesaiEventItems.length; i++) {
+    const item = selesaiEventItems[i];
+    const kembali = Number(document.getElementById('kembali_' + i).value || 0);
+    const rusak = Number(document.getElementById('rusak_' + i).value || 0);
+    const hilang = Number(document.getElementById('hilang_' + i).value || 0);
+
+    await db.from('event_detail').update({
+      jumlah_kembali: kembali,
+      jumlah_rusak: rusak,
+      jumlah_hilang: hilang,
+      status_kembali: 'Kembali Lengkap'
+    }).eq('id', item.idDetail);
+
+    if (kembali > 0) {
+      await db.from('barang').update({ stok: item.stokSaatIni + kembali }).eq('id', item.barangId);
+
+      await db.from('transaksi').insert([{
+        barang_id: item.barangId,
+        nama_barang: item.namaBarang,
+        jenis_transaksi: 'MASUK',
+        jumlah: kembali,
+        event_id: currentSelesaiEvent,
+        user_input: 'Admin',
+        keterangan: `Pengembalian event (Rusak: ${rusak}, Hilang: ${hilang})`
+      }]);
+    }
+  }
+
+  await db.from('event').update({ status: 'SELESAI' }).eq('id', currentSelesaiEvent);
+
+  alert('Event selesai dan stok barang telah diperbarui!');
+  closeModal('selesaiEventModal');
+  loadEvents();
+  loadDashboard();
+}
+
+/* =====================================================
+   5. RIWAYAT TRANSAKSI GUDANG
+===================================================== */
+let transaksiGudangData = [];
+
+async function loadTransaksi() {
+  const { data, error } = await db.from('transaksi').select('*').order('tanggal', { ascending: false });
+  if (error) return alert('Gagal memuat riwayat: ' + error.message);
+
+  transaksiGudangData = data || [];
+  const container = document.getElementById('transaksiList');
+  if (!transaksiGudangData.length) {
+    container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Belum ada riwayat gudang.</p>';
+    return;
+  }
+
+  container.innerHTML = transaksiGudangData.map(t => {
+    const isMasuk = t.jenis_transaksi === 'MASUK';
+    return `
+      <div class="list-card">
+        <div>
+          <div class="item-title">${t.nama_barang || '-'}</div>
+          <div class="item-meta">${formatDate(t.tanggal)} • ${t.keterangan || '-'}</div>
+        </div>
+        <div style="text-align:right;">
+          <span class="pill ${isMasuk ? 'pill-green' : 'pill-red'}">${isMasuk ? '+' : '-'}${t.jumlah} ${t.jenis_transaksi}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function exportTransaksiCSV() {
+  const today = new Date().toISOString().slice(0, 10);
+  const headers = ['Waktu', 'Nama Barang', 'Jenis Transaksi', 'Jumlah', 'User', 'Keterangan'];
+  const rows = transaksiGudangData.map(t => [
+    formatDate(t.tanggal),
+    t.nama_barang || '-',
+    t.jenis_transaksi,
+    t.jumlah,
+    t.user_input || '-',
+    t.keterangan || '-'
+  ]);
+  downloadCSV(`Riwayat_Gudang_Bahasa_Global_${today}.csv`, headers, rows);
+}
+
+/* =====================================================
+   6. KEUANGAN / PETTY CASH (MONEY LOVER ENGINE)
+===================================================== */
+let kasKategoriMaster = [];
+let kasTransaksiData = [];
+
+function getCategoryEmoji(kategori) {
+  const k = (kategori || '').toLowerCase();
+  if (k.includes('tol')) return '🛣️';
+  if (k.includes('parkir')) return '🅿️';
+  if (k.includes('drop') || k.includes('dana') || k.includes('pusat')) return '🏦';
+  if (k.includes('refund') || k.includes('kembali')) return '🔄';
+  return '💸';
+}
+
+async function loadKeuangan() {
+  const { data: katData } = await db.from('kas_kategori').select('*').order('nama_kategori');
+  kasKategoriMaster = katData || [];
+
+  const { data: trxData, error } = await db.from('kas_transaksi').select('*').order('tanggal', { ascending: false }).order('created_at', { ascending: false });
+  if (error) return alert('Gagal memuat data kas: ' + error.message);
+
+  kasTransaksiData = trxData || [];
+  let totalMasuk = 0;
+  let totalKeluar = 0;
+
+  kasTransaksiData.forEach(t => {
+    const nom = Number(t.nominal || 0);
+    if (t.tipe === 'PEMASUKAN') totalMasuk += nom;
+    else total
