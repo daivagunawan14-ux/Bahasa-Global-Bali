@@ -17,11 +17,6 @@
   <link rel="icon" sizes="192x192" href="https://i.ibb.co.com/pBjRf26c/logo-bg-isotm-in-color-1-678ff167637b6.webp">
   <link rel="apple-touch-icon" href="https://i.ibb.co.com/pBjRf26c/logo-bg-isotm-in-color-1-678ff167637b6.webp">
 
-  <!-- FONT MODERN -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <!-- LIBRARY SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -32,7 +27,6 @@
       --gold-dark: #9A7414;
       --gold-soft: #FBF6E9;
       --dark-bg: #1E1B18;
-      --dark-card: #2A2622;
       --bg-body: #F6F5F2;
       --text-main: #1F2937;
       --text-muted: #6B7280;
@@ -46,7 +40,7 @@
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
       margin: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg-body);
       color: var(--text-main);
       padding-bottom: 95px;
@@ -63,13 +57,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .brand { display: flex; align-items: center; gap: 12px; }
     .brand img {
       width: 36px;
       height: 36px;
@@ -78,19 +68,8 @@
       border: 1.5px solid var(--gold-light);
       background: white;
     }
-    .brand-title {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      background: linear-gradient(135deg, #F5E1A4, #D4AF37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .brand-sub {
-      font-size: 11px;
-      color: #A8A29E;
-      display: block;
-    }
+    .brand-title { font-size: 17px; font-weight: 800; color: #E6C667; letter-spacing: 0.3px; }
+    .brand-sub { font-size: 11px; color: #A8A29E; display: block; }
     .badge-gold {
       background: rgba(212, 175, 55, 0.15);
       color: var(--gold-light);
@@ -102,14 +81,9 @@
     }
 
     /* MAIN CONTAINER */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 18px 16px;
-    }
-    .page { display: none; animation: fadeIn 0.2s ease; }
+    .container { max-width: 680px; margin: 0 auto; padding: 18px 16px; }
+    .page { display: none; }
     .page.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     .page-header {
       display: flex;
@@ -118,26 +92,15 @@
       margin-bottom: 16px;
       gap: 10px;
     }
-    .page-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 0;
-      color: var(--dark-bg);
-    }
+    .page-title { font-size: 20px; font-weight: 800; margin: 0; color: var(--dark-bg); }
 
     /* CARDS & STATS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
     .stat-card {
       background: white;
       padding: 16px 12px;
       border-radius: 16px;
       border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       text-align: center;
     }
     .stat-icon {
@@ -145,7 +108,6 @@
       height: 36px;
       border-radius: 10px;
       background: var(--gold-soft);
-      color: var(--gold-dark);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -163,36 +125,10 @@
       border-radius: 20px;
       margin-bottom: 18px;
       border: 1px solid rgba(212, 175, 55, 0.35);
-      position: relative;
-      overflow: hidden;
     }
-    .hero-card::after {
-      content: '';
-      position: absolute;
-      right: -30px;
-      top: -30px;
-      width: 130px;
-      height: 130px;
-      background: radial-gradient(circle, rgba(212,175,55,0.28) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .hero-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--gold-light);
-    }
-    .hero-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 6px 0 14px 0;
-    }
-    .quick-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    .hero-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-light); }
+    .hero-title { font-size: 19px; font-weight: 800; margin: 6px 0 14px 0; }
+    .quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .quick-btn {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -204,10 +140,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
     }
-    .quick-btn:active { transform: scale(0.98); }
 
     /* MONEY LOVER PETTY CASH STYLE */
     .wallet-card {
@@ -215,27 +150,13 @@
       color: #1A160D;
       padding: 22px;
       border-radius: 22px;
-      box-shadow: 0 10px 25px rgba(170, 128, 22, 0.28);
+      box-shadow: 0 8px 20px rgba(170, 128, 22, 0.25);
       margin-bottom: 16px;
-      position: relative;
     }
-    .wallet-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 700;
-      opacity: 0.85;
-    }
-    .wallet-balance {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 10px 0 18px 0;
-      letter-spacing: -0.5px;
-      color: #14110A;
-    }
+    .wallet-top { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; opacity: 0.85; }
+    .wallet-balance { font-size: 30px; font-weight: 800; margin: 10px 0 18px 0; color: #14110A; }
     .wallet-flow {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border-radius: 14px;
       padding: 12px 16px;
       display: grid;
@@ -243,8 +164,8 @@
       gap: 12px;
     }
     .flow-item { display: flex; align-items: center; gap: 10px; }
-    .flow-dot-in { width: 32px; height: 32px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: flex; align-items: center; justify-content: center; font-weight: 800; }
-    .flow-dot-out { width: 32px; height: 32px; border-radius: 50%; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .flow-dot-in { width: 30px; height: 30px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: flex; align-items: center; justify-content: center; font-weight: 800; }
+    .flow-dot-out { width: 30px; height: 30px; border-radius: 50%; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; font-weight: 800; }
     .flow-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
     .flow-val-in { font-size: 14px; font-weight: 800; color: var(--green); }
     .flow-val-out { font-size: 14px; font-weight: 800; color: var(--red); }
@@ -256,7 +177,6 @@
       border: 1px solid var(--border);
       margin-bottom: 14px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
     .ml-date-header {
       background: #FAF9F6;
@@ -279,9 +199,9 @@
     .ml-trx-row:last-child { border-bottom: none; }
     .ml-trx-left { display: flex; align-items: center; gap: 12px; }
     .ml-cat-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       background: var(--gold-soft);
       display: flex;
       align-items: center;
@@ -294,7 +214,7 @@
     .ml-amount-in { font-size: 15px; font-weight: 800; color: var(--green); white-space: nowrap; }
     .ml-amount-out { font-size: 15px; font-weight: 800; color: var(--red); white-space: nowrap; }
 
-    /* FLOATING ACTION BUTTON (MONEY LOVER STYLE) */
+    /* FLOATING ACTION BUTTON */
     .fab-gold {
       position: fixed;
       bottom: 84px;
@@ -306,29 +226,25 @@
       padding: 14px 20px;
       font-size: 14px;
       font-weight: 800;
-      box-shadow: 0 8px 20px rgba(166, 124, 30, 0.4);
+      box-shadow: 0 6px 16px rgba(166, 124, 30, 0.35);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
       z-index: 60;
     }
-    .fab-gold:active { transform: scale(0.95); }
 
-    /* ITEM CARDS (BARANG, EVENT, RIWAYAT) */
+    /* ITEM CARDS */
     .search-box {
       width: 100%;
       padding: 12px 16px;
       border-radius: 14px;
       border: 1px solid var(--border);
       background: white;
-      font-family: inherit;
       font-size: 14px;
       margin-bottom: 14px;
       outline: none;
     }
-    .search-box:focus { border-color: var(--gold-primary); }
-
     .list-card {
       background: white;
       border-radius: 16px;
@@ -339,24 +255,17 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
     .item-title { font-size: 15px; font-weight: 700; color: var(--dark-bg); }
     .item-meta { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-    .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 11px;
-      font-weight: 700;
-    }
+    .pill { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; }
     .pill-gold { background: var(--gold-soft); color: var(--gold-dark); }
     .pill-green { background: var(--green-soft); color: var(--green); }
     .pill-red { background: var(--red-soft); color: var(--red); }
 
     /* BUTTONS */
     button { font-family: inherit; border: none; border-radius: 12px; padding: 11px 16px; font-weight: 700; font-size: 13px; cursor: pointer; }
-    .btn-gold { background: linear-gradient(135deg, #D4AF37, #B0861C); color: #14110A; box-shadow: 0 4px 12px rgba(176, 134, 28, 0.25); }
+    .btn-gold { background: linear-gradient(135deg, #D4AF37, #B0861C); color: #14110A; }
     .btn-outline-gold {
       background: var(--gold-soft);
       color: var(--gold-dark);
@@ -367,7 +276,6 @@
       align-items: center;
       gap: 5px;
     }
-    .btn-outline-gold:active { transform: scale(0.97); }
     .btn-dark { background: var(--dark-bg); color: var(--gold-light); }
     .btn-danger { background: var(--red-soft); color: var(--red); padding: 7px 12px; }
     .btn-ghost { background: #F3F4F6; color: var(--text-main); }
@@ -378,14 +286,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
+      background: #FFFFFF;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-around;
       padding: 8px 4px 12px 4px;
       z-index: 80;
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
     }
     .nav-item {
       flex: 1;
@@ -398,31 +305,17 @@
       font-weight: 600;
       cursor: pointer;
       padding: 4px 0;
-      border-radius: 12px;
-      transition: 0.2s;
     }
-    .nav-icon {
-      font-size: 20px;
-      padding: 4px 14px;
-      border-radius: 20px;
-      transition: 0.2s;
-    }
-    .nav-item.active {
-      color: var(--gold-dark);
-      font-weight: 800;
-    }
-    .nav-item.active .nav-icon {
-      background: var(--gold-soft);
-      transform: translateY(-2px);
-    }
+    .nav-icon { font-size: 20px; padding: 4px 14px; border-radius: 20px; }
+    .nav-item.active { color: var(--gold-dark); font-weight: 800; }
+    .nav-item.active .nav-icon { background: var(--gold-soft); }
 
-    /* MODALS (MOBILE SHEET STYLE) */
+    /* MODALS */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15, 13, 10, 0.6);
-      backdrop-filter: blur(3px);
+      background: rgba(15, 13, 10, 0.65);
       justify-content: center;
       align-items: flex-end;
       z-index: 100;
@@ -436,16 +329,14 @@
       overflow-y: auto;
       padding: 24px 20px 30px 20px;
       border-radius: 24px 24px 0 0;
-      animation: slideUp 0.25s ease;
     }
     @media(min-width: 600px) {
       .modal { align-items: center; }
       .modal-content { border-radius: 22px; width: 95%; }
     }
-    @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     .modal-title { font-size: 18px; font-weight: 800; margin: 0 0 16px 0; color: var(--dark-bg); }
-    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
     input, select, textarea {
       width: 100%;
       padding: 12px;
@@ -456,9 +347,6 @@
       font-size: 14px;
       background: #FAF9F6;
     }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold-primary); background: white; }
-
-    /* SEGMENTED CONTROL MONEY LOVER MODAL */
     .ml-type-switch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -467,23 +355,10 @@
       border-radius: 14px;
       margin-bottom: 16px;
     }
-    .ml-type-btn {
-      padding: 10px;
-      text-align: center;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-    .ml-type-btn.active-out { background: white; color: var(--red); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-    .ml-type-btn.active-in { background: white; color: var(--green); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-    .nominal-big {
-      font-size: 24px !important;
-      font-weight: 800 !important;
-      color: var(--dark-bg);
-      text-align: right;
-    }
+    .ml-type-btn { padding: 10px; text-align: center; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; color: var(--text-muted); }
+    .ml-type-btn.active-out { background: white; color: var(--red); }
+    .ml-type-btn.active-in { background: white; color: var(--green); }
+    .nominal-big { font-size: 24px !important; font-weight: 800 !important; color: var(--dark-bg); text-align: right; }
   </style>
 </head>
 <body>
@@ -564,7 +439,7 @@
     <div id="transaksiList"></div>
   </section>
 
-  <!-- 5. PETTY CASH (MONEY LOVER STYLE) -->
+  <!-- 5. PETTY CASH -->
   <section id="keuangan" class="page">
     <div class="wallet-card">
       <div class="wallet-top">
@@ -700,7 +575,7 @@
   </div>
 </div>
 
-<!-- MODAL KAS (MONEY LOVER INPUT STYLE) -->
+<!-- MODAL KAS -->
 <div id="kasModal" class="modal">
   <div class="modal-content">
     <h2 class="modal-title">💰 Catat Transaksi Kas</h2>
@@ -732,21 +607,22 @@
 
 <script>
 /* =====================================================
-   1. KONFIGURASI SUPABASE & PWA
+   1. KONFIGURASI SUPABASE & CLEANUP SERVICE WORKER
 ===================================================== */
 const SUPABASE_URL = 'https://vewzcaxghmlsyjhyldow.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_L1Z2C3ddfhAcvRWUP6Vb_A_qwykKvBL';
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// Hapus cache Service Worker lama agar tidak macet saat update versi
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW gagal:', err));
-  });
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(reg => reg.unregister());
+  }).catch(() => {});
 }
 
 /* =====================================================
-   2. GLOBAL, NAVIGATION & CSV EXPORT HELPER
+   2. GLOBAL, NAVIGATION & CSV EXPORT
 ===================================================== */
 function showPage(page, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -785,8 +661,8 @@ function downloadCSV(filename, headers, rows) {
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
+  link.href = url;
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -799,16 +675,16 @@ function downloadCSV(filename, headers, rows) {
 let barangData = [];
 
 async function loadDashboard() {
-  const { data: barang } = await db.from('barang').select('stok');
-  const { data: events } = await db.from('event').select('status').eq('status', 'BERJALAN');
+  try {
+    const { data: barang } = await db.from('barang').select('stok');
+    const { data: events } = await db.from('event').select('status').eq('status', 'BERJALAN');
 
-  const totalJenis = barang ? barang.length : 0;
-  const totalStok = barang ? barang.reduce((sum, item) => sum + Number(item.stok || 0), 0) : 0;
-  const eventAktif = events ? events.length : 0;
-
-  document.getElementById('totalJenis').innerText = totalJenis;
-  document.getElementById('totalStok').innerText = totalStok;
-  document.getElementById('eventAktif').innerText = eventAktif;
+    document.getElementById('totalJenis').innerText = barang ? barang.length : 0;
+    document.getElementById('totalStok').innerText = barang ? barang.reduce((sum, item) => sum + Number(item.stok || 0), 0) : 0;
+    document.getElementById('eventAktif').innerText = events ? events.length : 0;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 async function loadBarang() {
@@ -852,15 +728,8 @@ function exportBarangCSV() {
   const today = new Date().toISOString().slice(0, 10);
   const headers = ['Kode Barang', 'Nama Barang', 'Kategori', 'Stok', 'Satuan', 'Stok Minimum', 'Kondisi', 'Lokasi', 'Keterangan'];
   const rows = barangData.map(b => [
-    b.kode_barang || '-',
-    b.nama_barang,
-    b.kategori || '-',
-    b.stok,
-    b.satuan || 'Unit',
-    b.stok_minimum || 1,
-    b.kondisi || 'Baik',
-    b.lokasi || '-',
-    b.keterangan || '-'
+    b.kode_barang || '-', b.nama_barang, b.kategori || '-', b.stok,
+    b.satuan || 'Unit', b.stok_minimum || 1, b.kondisi || 'Baik', b.lokasi || '-', b.keterangan || '-'
   ]);
   downloadCSV(`Database_Barang_Bahasa_Global_${today}.csv`, headers, rows);
 }
@@ -887,12 +756,8 @@ async function saveBarang() {
 
   if (stok > 0 && inserted) {
     await db.from('transaksi').insert([{
-      barang_id: inserted.id,
-      nama_barang: nama,
-      jenis_transaksi: 'MASUK',
-      jumlah: stok,
-      user_input: 'Admin',
-      keterangan: 'Stok awal barang baru'
+      barang_id: inserted.id, nama_barang: nama, jenis_transaksi: 'MASUK',
+      jumlah: stok, user_input: 'Admin', keterangan: 'Stok awal barang baru'
     }]);
   }
 
@@ -963,20 +828,14 @@ async function saveEvent() {
 
   for (const item of selectedEventBarang) {
     await db.from('event_detail').insert([{
-      event_id: newEvent.id,
-      barang_id: item.idBarang,
-      jumlah_pinjam: item.jumlah,
-      status_kembali: 'Dipinjam'
+      event_id: newEvent.id, barang_id: item.idBarang, jumlah_pinjam: item.jumlah, status_kembali: 'Dipinjam'
     }]);
 
     await db.from('barang').update({ stok: item.stok - item.jumlah }).eq('id', item.idBarang);
 
     await db.from('transaksi').insert([{
-      barang_id: item.idBarang,
-      nama_barang: item.nama,
-      jenis_transaksi: 'KELUAR',
-      jumlah: item.jumlah,
-      event_id: newEvent.id,
+      barang_id: item.idBarang, nama_barang: item.nama, jenis_transaksi: 'KELUAR',
+      jumlah: item.jumlah, event_id: newEvent.id,
       user_input: document.getElementById('eventPIC').value || 'Admin',
       keterangan: `Keluar untuk Event: ${nama}`
     }]);
@@ -1065,22 +924,15 @@ async function saveSelesaiEvent() {
     const hilang = Number(document.getElementById('hilang_' + i).value || 0);
 
     await db.from('event_detail').update({
-      jumlah_kembali: kembali,
-      jumlah_rusak: rusak,
-      jumlah_hilang: hilang,
-      status_kembali: 'Kembali Lengkap'
+      jumlah_kembali: kembali, jumlah_rusak: rusak, jumlah_hilang: hilang, status_kembali: 'Kembali Lengkap'
     }).eq('id', item.idDetail);
 
     if (kembali > 0) {
       await db.from('barang').update({ stok: item.stokSaatIni + kembali }).eq('id', item.barangId);
 
       await db.from('transaksi').insert([{
-        barang_id: item.barangId,
-        nama_barang: item.namaBarang,
-        jenis_transaksi: 'MASUK',
-        jumlah: kembali,
-        event_id: currentSelesaiEvent,
-        user_input: 'Admin',
+        barang_id: item.barangId, nama_barang: item.namaBarang, jenis_transaksi: 'MASUK',
+        jumlah: kembali, event_id: currentSelesaiEvent, user_input: 'Admin',
         keterangan: `Pengembalian event (Rusak: ${rusak}, Hilang: ${hilang})`
       }]);
     }
@@ -1130,18 +982,13 @@ function exportTransaksiCSV() {
   const today = new Date().toISOString().slice(0, 10);
   const headers = ['Waktu', 'Nama Barang', 'Jenis Transaksi', 'Jumlah', 'User', 'Keterangan'];
   const rows = transaksiGudangData.map(t => [
-    formatDate(t.tanggal),
-    t.nama_barang || '-',
-    t.jenis_transaksi,
-    t.jumlah,
-    t.user_input || '-',
-    t.keterangan || '-'
+    formatDate(t.tanggal), t.nama_barang || '-', t.jenis_transaksi, t.jumlah, t.user_input || '-', t.keterangan || '-'
   ]);
   downloadCSV(`Riwayat_Gudang_Bahasa_Global_${today}.csv`, headers, rows);
 }
 
 /* =====================================================
-   6. KEUANGAN / PETTY CASH (MONEY LOVER ENGINE)
+   6. KEUANGAN / PETTY CASH
 ===================================================== */
 let kasKategoriMaster = [];
 let kasTransaksiData = [];
@@ -1169,4 +1016,139 @@ async function loadKeuangan() {
   kasTransaksiData.forEach(t => {
     const nom = Number(t.nominal || 0);
     if (t.tipe === 'PEMASUKAN') totalMasuk += nom;
-    else total
+    else totalKeluar += nom;
+  });
+
+  document.getElementById('kasSaldo').innerText = formatRupiah(totalMasuk - totalKeluar);
+  document.getElementById('kasMasuk').innerText = formatRupiah(totalMasuk);
+  document.getElementById('kasKeluar').innerText = formatRupiah(totalKeluar);
+
+  const listContainer = document.getElementById('kasList');
+  if (kasTransaksiData.length === 0) {
+    listContainer.innerHTML = '<div class="list-card" style="justify-content:center; color:var(--text-muted);">Belum ada catatan transaksi kas.</div>';
+    return;
+  }
+
+  const grouped = {};
+  kasTransaksiData.forEach(t => {
+    const tgl = t.tanggal || 'Tanpa Tanggal';
+    if (!grouped[tgl]) grouped[tgl] = { items: [], net: 0 };
+    grouped[tgl].items.push(t);
+    grouped[tgl].net += (t.tipe === 'PEMASUKAN' ? Number(t.nominal) : -Number(t.nominal));
+  });
+
+  listContainer.innerHTML = Object.keys(grouped).map(tgl => {
+    const group = grouped[tgl];
+    const netSign = group.net >= 0 ? '+' : '';
+    const rowsHtml = group.items.map(t => {
+      const isIn = t.tipe === 'PEMASUKAN';
+      return `
+        <div class="ml-trx-row">
+          <div class="ml-trx-left">
+            <div class="ml-cat-icon">${getCategoryEmoji(t.kategori)}</div>
+            <div>
+              <div class="ml-cat-name">${t.kategori}</div>
+              <div class="ml-cat-note">${t.keterangan || 'Tidak ada catatan'}</div>
+            </div>
+          </div>
+          <div class="${isIn ? 'ml-amount-in' : 'ml-amount-out'}">
+            ${isIn ? '+' : '-'}${formatRupiah(t.nominal)}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="ml-date-group">
+        <div class="ml-date-header">
+          <span>📅 ${formatDate(tgl)}</span>
+          <span>${netSign}${formatRupiah(group.net)}</span>
+        </div>
+        ${rowsHtml}
+      </div>
+    `;
+  }).join('');
+}
+
+function exportKasCSV() {
+  const today = new Date().toISOString().slice(0, 10);
+  const headers = ['Tanggal', 'Kategori', 'Keterangan', 'Tipe', 'Nominal (Rp)', 'Input Oleh'];
+  const rows = kasTransaksiData.map(t => [
+    t.tanggal, t.kategori, t.keterangan || '-', t.tipe, t.nominal, t.user_input || 'Admin'
+  ]);
+  downloadCSV(`Laporan_Petty_Cash_Bahasa_Global_${today}.csv`, headers, rows);
+}
+
+function setKasTipe(tipe) {
+  document.getElementById('kasTipe').value = tipe;
+  const tabOut = document.getElementById('tabOut');
+  const tabIn = document.getElementById('tabIn');
+  if (tipe === 'PENGELUARAN') {
+    tabOut.className = 'ml-type-btn active-out';
+    tabIn.className = 'ml-type-btn';
+  } else {
+    tabIn.className = 'ml-type-btn active-in';
+    tabOut.className = 'ml-type-btn';
+  }
+  renderKasKategori();
+}
+
+function openKasModal() {
+  document.getElementById('kasTanggal').valueAsDate = new Date();
+  document.getElementById('kasNominal').value = '';
+  document.getElementById('kasKeterangan').value = '';
+  setKasTipe('PENGELUARAN');
+  openModal('kasModal');
+}
+
+function renderKasKategori() {
+  const tipeSelected = document.getElementById('kasTipe').value;
+  const selectKategori = document.getElementById('kasKategori');
+  const filteredKat = kasKategoriMaster.filter(k => k.tipe === tipeSelected);
+  
+  if (filteredKat.length === 0) {
+    selectKategori.innerHTML = tipeSelected === 'PENGELUARAN'
+      ? '<option value="Tol">Tol</option><option value="Parkir">Parkir</option>'
+      : '<option value="Drop Dana">Drop Dana</option>';
+  } else {
+    selectKategori.innerHTML = filteredKat.map(k => `<option value="${k.nama_kategori}">${k.nama_kategori}</option>`).join('');
+  }
+}
+
+async function saveKas() {
+  const payload = {
+    tipe: document.getElementById('kasTipe').value,
+    tanggal: document.getElementById('kasTanggal').value,
+    kategori: document.getElementById('kasKategori').value,
+    nominal: Number(document.getElementById('kasNominal').value),
+    keterangan: document.getElementById('kasKeterangan').value.trim(),
+    user_input: 'Admin'
+  };
+
+  if (!payload.tanggal) return alert('Pilih tanggal!');
+  if (!payload.nominal || payload.nominal <= 0) return alert('Nominal tidak valid!');
+
+  const btn = document.getElementById('btnSaveKas');
+  btn.disabled = true;
+  btn.innerText = 'Menyimpan...';
+
+  const { error } = await db.from('kas_transaksi').insert([payload]);
+
+  btn.disabled = false;
+  btn.innerText = 'Simpan';
+
+  if (error) return alert('Error: ' + error.message);
+
+  closeModal('kasModal');
+  loadKeuangan();
+}
+
+/* =====================================================
+   7. INITIAL LOAD
+===================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  loadDashboard();
+});
+</script>
+</body>
+</html>
