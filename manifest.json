@@ -1,11 +1,11 @@
 {
-  "name": "Super App Gudang & Kas",
-  "short_name": "Gudang & Kas",
-  "description": "Aplikasi Manajemen Inventaris Gudang dan Petty Cash Kantor",
+  "name": "Bahasa Global Bali",
+  "short_name": "Bahasa Global Bali",
+  "description": "Aplikasi Manajemen Gudang & Petty Cash Bahasa Global",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#172033",
-  "theme_color": "#172033",
+  "background_color": "#1E1B18",
+  "theme_color": "#1E1B18",
   "orientation": "portrait",
   "icons": [
     {
